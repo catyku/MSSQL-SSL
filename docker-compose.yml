@@ -1,0 +1,25 @@
+services:
+  sql-server-express:
+    #image: mcr.microsoft.com/mssql/server:latest
+    #image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: docker-sql-server-express
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=MyPass@word
+      - MSSQL_PID=Developer
+      - TZ=Asia/Taipei
+    volumes:
+      - ./data:/var/opt/mssql/data
+      #- ./ssl/mssql.pem:/etc/ssl/certs/mssql.pem
+      - ./mssql.conf:/var/opt/mssql/mssql.conf
+      #- ./ssl/mssql.key:/etc/ssl/private/mssql.key
+      - ./ssl:/var/opt/mssql/secrets
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+
+    ports:
+      - "127.0.0.1:51433:1433"
+      - "192.168.2.134:51433:1433"
+
