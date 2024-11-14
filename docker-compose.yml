@@ -7,7 +7,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=MyPass@word
-      - MSSQL_PID=Developer
+      - MSSQL_PID=Express
       - TZ=Asia/Taipei
     volumes:
       - ./data:/var/opt/mssql/data
